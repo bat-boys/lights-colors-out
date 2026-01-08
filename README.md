@@ -15,7 +15,7 @@ You must give the starting board state as a parameter so that all cell statuses
 
 ```
 $ cargo build --release
-$ ./target/release/lights-colors-out --lights-out 0010001001100000000100111
+$ ./target/release/lights-colors-out --lights-out
 
 Starting state:
    +---+---+---+---+---+
@@ -44,7 +44,7 @@ Moves: <omitted!>
 And colors out respectively:
 
 ```
-$ ./target/release/lights-colors-out --colors-out 0001110010101010101010111
+$ ./target/release/lights-colors-out --colors-out
 
 Starting state:
    +---+---+---+---+---+

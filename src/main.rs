@@ -143,25 +143,28 @@ pub fn solve_bfs(start: Node, moves: [(&str, u32); 25], check_victory: fn(u32) -
 fn main() {
     // Read starting state from command-line arguments
     let args: Vec<String> = env::args().collect();
-    if args.len() != 3 {
-        eprintln!(
-            "Usage: {} --lights-out | --colors-out <starting state>",
-            args[0]
-        );
+    if args.len() != 2 {
+        eprintln!("Usage: {} --lights-out | --colors-out", args[0]);
         std::process::exit(1);
     }
 
-    let (moves, check_victory): ([(&str, u32); 25], fn(u32) -> i32) = match args[1].as_str() {
-        "--lights-out" => (lights_out::MOVES, lights_out::check_victory),
-        "--colors-out" => (colors_out::MOVES, colors_out::check_victory),
-        _ => {
-            eprintln!("Invalid argument. Use --lights-out or --colors-out.");
-            std::process::exit(1);
-        }
-    };
-
-    let start_state = u32::from_str_radix(&args[2], 2)
-        .expect("Invalid starting state. Must be a 25-bit integer.");
+    let (start_state, moves, check_victory): (u32, [(&str, u32); 25], fn(u32) -> i32) =
+        match args[1].as_str() {
+            "--lights-out" => (
+                lights_out::START,
+                lights_out::MOVES,
+                lights_out::check_victory,
+            ),
+            "--colors-out" => (
+                colors_out::START,
+                colors_out::MOVES,
+                colors_out::check_victory,
+            ),
+            _ => {
+                eprintln!("Invalid argument. Use --lights-out or --colors-out.");
+                std::process::exit(1);
+            }
+        };
 
     let start = Node {
         state: start_state,

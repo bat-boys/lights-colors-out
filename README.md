@@ -87,3 +87,22 @@ Processed 2400000 moves, queue size: 22207868
 Processed 2500000 moves, queue size: 23106098
 Moves: <omitted!>
 ```
+
+## Building the web version
+
+The browser version is a static WebAssembly site in bat-boys.github.io. Build it
+manually from the repository root:
+
+``` sh
+rustup target add wasm32-unknown-unknown
+cargo install wasm-pack
+wasm-pack build --target web --out-dir ../bat-boys.github.io/lights-colors-out/pkg/
+rm ../bat-boys.github.io/lights-colors-out/pkg/.gitignore
+```
+
+Serve bat-boys.github.io over HTTP when testing locally, or copy the directory to the
+desired GitHub Pages deployment location.
+
+``` sh
+python3 -m http.server --directory .
+```
